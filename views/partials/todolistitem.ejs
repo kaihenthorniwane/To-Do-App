@@ -1,0 +1,86 @@
+<!-- task-card.ejs -->
+<div class="task-card"  id="todo-item-<%= item.id %>">
+    <%
+    function formatDate(date) {
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        return `${date.toLocaleDateString('en-US', options)}`;
+    }
+    function isDueSoon(dueDate) {
+        const today = new Date();
+        const twoMonthsLater = new Date(today.getFullYear(), today.getMonth() + 2, today.getDate());
+        return dueDate < twoMonthsLater;
+    }
+
+    const dateFormatted = formatDate(item.dueDate);
+
+    let checkIconClass = ""; 
+    let priorityIconSrc = "";
+    let priorityText = "";
+    let priorityWeight = "";
+    let dateIconSrc = "";
+    let dateText = "";
+    let dateWeight ="";
+    switch(list){
+        case "todo":
+            checkIconClass = "todo-check-rive";
+            break;
+        case "started":
+            checkIconClass = "started-check-rive";
+            break;
+        case "done":
+            checkIconClass = "done-check-rive";
+            break;
+    }
+    switch(item.priority){
+        case "High":
+            priorityIconSrc = "assets/svg/High Priority.svg";
+            priorityText = "High Priority";
+            priorityWeight = " high";
+            break;
+        case "Medium":
+            priorityIconSrc = "assets/svg/Medium Priority.svg";
+            priorityText = "Medium Priority";
+            break;
+        case "Low":
+            priorityIconSrc = "assets/svg/Low Priority.svg";
+            priorityText = "Low Priority";
+            break;
+    }
+    if(isDueSoon(item.dueDate)){
+        dateIconSrc = "assets/svg/Calendar Icon Alert.svg";
+        dateText = "Due Soon: ";
+        dateWeight = " high";
+    }else{
+        dateIconSrc = "assets/svg/Calendar Icon.svg";
+        dateText = "Due: ";
+    }
+     %>
+    <div class="task-action-icons">
+        <canvas class = "<%= checkIconClass %> task-check" id="check-<%= item.id %>" width="30px" height="30px"></canvas>
+        <canvas class="edit-rive" width="28px" height="28px"></canvas>
+        <canvas class="move-rive draggable" data-id="<%= item.id %>" width="28px" height="28px"></canvas>
+    </div>
+    <div class="task-contents">
+        <h3 class="task-title">
+            <%= item.title %>
+        </h3>
+        <ul class="task-details">
+            <%= item.description %>
+        </ul>
+        <div class="task-footer">
+            <div class="due-date">
+                <img class="icon-calendar" src="<%= dateIconSrc %>" width="17px" height="18px"/>
+                <span>
+                    <span class="<%= dateWeight %>">
+                        <%= dateText %>
+                    </span>
+                    <%= dateFormatted %>
+                </span>
+            </div>
+            <div class="priority<%= priorityWeight %>">
+                <img class="icon-priority" src="<%= priorityIconSrc %>"/>
+                <span><%= priorityText %></span>
+            </div>
+        </div>
+    </div>
+</div>

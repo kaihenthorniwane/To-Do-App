@@ -1,0 +1,533 @@
+html {
+    font-size: 18px;
+    font-family: 'Tenon', sans-serif;
+}
+
+body{
+    padding: 0px;
+    margin: 0px;
+}
+
+.main-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.column-container-wrapper {
+    display: flex;
+    max-width: 100%;
+    width: 1100px;
+    padding-top: 90px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+
+.column-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 40px;
+    width: 100%;
+    flex-shrink: 0;
+    transition: width 100ms ease-out;
+    /* for animations */
+    position: relative;
+}
+
+.to-do-item-list, .title-list-wrapper, .new-and-to-do-wrapper  {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+}
+/* 
+.new-to-do-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 50px;
+} */
+
+.to-do-item-list {
+    outline: black 0px solid;
+    border-radius: 6px;
+    outline-offset: 5px;
+    transition: outline-width, border-radius, outline-offset 100ms ease-out;
+}
+
+/* when droppable element is hovered over */
+.drop-hover {
+    outline-width: 2px;
+    border-radius: 12px;
+    outline-offset: 14px;
+}
+
+/* card partial */
+
+.task-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.task-action-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.task-contents {
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+    margin-top: 3px;
+    width: 100%;
+}
+
+.task-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* title details */
+
+.task-title {
+    font-family: 'Tenon', sans-serif;
+    font-size: 1.34rem;
+    line-height: 1.34rem;
+    font-weight: 500;
+    margin: 0px;
+    hyphens: auto;
+    /* outline info */
+    outline: #CECECE 0px solid;
+    border-radius: 14px;
+    outline-offset: -1px;
+}
+
+.task-details, .form-control {
+    font-family: 'Tenon', sans-serif;
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+    hyphens: auto;
+    /* outline info */
+    outline: #CECECE 0px solid;
+    border-radius: 14px;
+    outline-offset: -1px;
+}
+
+/* due date */
+
+.due-date, .priority {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.due-date .high{
+    font-weight: 700;
+}
+
+.due-date-wrapper{
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+    align-items: center;
+}
+
+.due-date-wrapper > label{
+    white-space: nowrap;
+}
+
+.due-date-wrapper > input{
+    padding-left: 0px;
+    outline: #CECECE 0px solid;
+    background-color: transparent;
+    border-width: 0px;
+    color: black;
+    border-radius: 3px;
+}
+
+/* priority */
+
+.priority {
+    border-width: 0px;
+    padding: 0px;
+    position: relative;
+    /* outline info */
+    background-color: white;
+    border-radius: 14px;
+}
+
+.priority.high{
+    font-weight: 500;
+}
+
+.priority > span {
+    margin-top: 3px;
+    width: 100%;
+}
+
+.dropdown-icon{
+    margin-top: 3px;
+    display: none;
+}
+
+/* dropdown */
+
+.priority-list {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 12px;
+    outline: 0px solid #CECECE;
+    gap: 0px;
+}
+
+.priority-list-item {
+    display: flex;
+    gap: 10px;
+    background-color: white;
+    border-radius: 12px;
+    transition: background-color 100ms ease-out;
+}
+/* 
+.priority-list-item:hover {
+    background-color: #E4E4E4;
+} */
+
+.priority-list-item > span {
+    margin-top: 2px;
+    width: 100%;
+}
+
+/* button wrapper */
+
+.button-wrapper{
+    gap: 10px;
+    display: none;
+}
+
+.action-button {
+    font-family: 'Tenon', sans-serif;
+    font-size: 1rem;
+    width: 100%;
+    flex: 1;
+    background-color: transparent;
+    padding: 8px;
+    border-radius: 100px;
+    border-width: 0px;
+    cursor: pointer;
+    transform: scale(1);
+    /* transitions */
+    transition-property: color, transform, outline-width, outline-offset, outline-color, color, background-color;
+    transition-duration: 400ms;
+    transition-timing-function: cubic-bezier(.04,.83,.13,.99);
+}
+
+.action-button:hover{
+    transform: scale(1.025);
+    transition-duration: 75ms;
+    transition-timing-function: cubic-bezier(.04,.83,.13,.99);
+}
+
+.action-button:active{
+    transform: scale(0.9);
+    transition-duration: 75ms;
+    transition-timing-function: cubic-bezier(.04,.83,.13,.99);
+}
+
+.action-button.secondary {
+    outline: 1px black solid;
+    outline-offset: -1px;
+    color: black;
+}
+
+.action-button.secondary:hover {
+    outline-width: 2px;
+    outline-offset: -2px;
+}
+
+.action-button.secondary:active {
+    outline-color: #ACACAC;
+    color: #ACACAC;
+}
+
+.action-button.primary {
+    background-color: black;
+    color: white;
+}
+
+.action-button.primary:hover {
+    background-color: #525252;
+}
+
+.action-button.primary:active {
+    background-color: black;
+    color: #525252;
+}
+/* editing-mode */
+
+/* title editing-mode */
+.task-title, .task-details, .due-date-wrapper > input, .priority{
+    transition-property: padding, outline-width;
+    transition-duration: 100ms;
+    transition-timing-function: cubic-bezier(.04,.83,.13,.99);
+}
+
+.due-date-wrapper {
+    transition-property: gap, margin-top;
+    transition-duration: 100ms;
+    transition-timing-function: cubic-bezier(.04,.83,.13,.99);
+}
+
+.task-footer {
+    transition-property: gap;
+    transition-duration: 100ms;
+    transition-timing-function: cubic-bezier(.04,.83,.13,.99);
+}
+
+.form-group.due-date{
+    transition-property: gap;
+    transition-duration: 100ms;
+    transition-timing-function: cubic-bezier(.04,.83,.13,.99);
+}
+
+.priority-list {
+    transition-property: padding, outline-width, outline-color, outline-offset, background-color, border-radius;
+    transition-duration: 100ms;
+    transition-timing-function: cubic-bezier(.04,.83,.13,.99);
+}
+
+.editing-mode .task-title, .editing-mode .task-details, .editing-mode .due-date-wrapper > input {
+    padding: 14px;
+    outline-width: 1px;
+    border-radius: 14px;
+}
+
+.editing-mode .due-date-wrapper {
+    gap:10px;
+    margin-top: 0px;
+}
+
+.editing-mode .task-footer {
+    gap:15px;
+}
+
+.editing-mode .form-group.due-date{
+    gap:0px;
+}
+
+
+
+.editing-mode *:hover{
+    outline-color: rgb(63, 63, 63);
+}
+
+.editing-mode .task-title:focus, .editing-mode .task-details:focus{
+    outline-width: 2px;
+    outline-offset: -2px;
+    outline-color: black;
+}
+
+
+/* priority list */
+.editing-mode .priority-list {
+    outline-width: 1px;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.editing-mode .priority-list-item{
+    padding: 8px 16px 8px 12px;
+}
+
+.editing-mode .dropdown-icon{
+    display: block;
+}
+
+.open-priority-dropdown .dropdown-icon{
+    display: none;
+}
+
+.priority-list.open-priority-dropdown{
+    border-radius: 16px;
+    outline-color: black;
+}
+
+.open-priority-dropdown .priority-list-item:hover{
+    background-color: #E4E4E4;
+}
+
+.not-selected-priority {
+    display:none;
+}
+
+.selected-priority {
+    display: flex;
+}
+
+
+/* new-to-do-passive */
+.new-to-do-passive .task-details, .new-to-do-passive .task-footer, .new-to-do-passive .edit-rive, .new-to-do-passive .move-rive{
+    display: none;
+}
+
+.new-to-do-passive > * {
+    transition-property: transform, color, border-color;
+    transition-duration: 100ms; 
+    transition-timing-function: ease-out;
+}
+
+.new-to-do-passive .task-title {
+    user-select: none;
+}
+
+.task-card.new-to-do-passive{
+    gap: 4px;
+    width: auto;
+    cursor: pointer;
+}
+
+.new-to-do-passive {
+    padding: 0px 8px 6px 0px;
+    border-bottom: black 2px solid;
+    flex-grow: 0;
+}
+
+.new-to-do-passive:hover {
+    border-color: #787878;
+}
+
+.new-to-do-passive:hover > *{
+    transform: translateY(-3px);
+    color: #787878;
+}
+
+.new-to-do-passive:active {
+    border-color: #CBCBCB;
+}
+
+.new-to-do-passive:active > *{
+    transition-duration: 50ms;
+    transform: translateY(2px);
+    border-color: #CBCBCB;
+    color: #CBCBCB;
+}
+
+/* new-to-do-composing */
+.task-card {
+    width: 100%;
+}
+
+.new-to-do-composing > .task-action-icons {
+    padding: 12px 0px;
+}
+
+
+/* rive classes */
+.edit-rive, .move-rive {
+    opacity: 0;
+}
+
+.task-check{
+    min-width: 30px;
+    max-width: 30px;
+}
+.edit-rive, .move-rive, .task-check {
+    min-width: 28px;
+    max-width: 28px;
+    transform: scale(1);
+    transition: transform 150ms ease-out,
+                opacity 75ms ease-out;
+}
+
+.edit-rive:active, .move-rive:active, .task-check:active {
+    transform: scale(0.85);
+    transition: transform 25ms ease-out;
+}
+
+.edit-rive:hover, .task-check:hover {
+    cursor: pointer; /* Changes the cursor to a pointing hand */
+}
+
+.move-rive:hover {
+    cursor: grab;
+}
+
+.move-rive:active {
+    cursor: grabbing;
+}
+
+/* card partial hover state */
+
+.to-do-item-list, .task-card:hover .edit-rive, .task-card:hover .move-rive {
+    opacity: 1;
+}
+
+/* card appearance animation */
+@keyframes unfold {
+    0% { transform: scaleY(0); }
+    100% { transform: scaleY(1); }
+}
+
+.unfold-animation {
+    animation: unfold 0.5s ease forwards;
+    transform-origin: top;
+}
+
+/* dummy card when you drag */
+
+#dummy-card-rive {
+    position: absolute;
+    pointer-events: none;
+    max-width: 250px;
+    z-index: 100;
+}
+
+/* Add media queries to ensure responsiveness */
+
+
+/* Media query for screen sizes smaller than a certain width */
+@media screen and (max-width: 900px) { /* Adjust 600px to your desired breakpoint */
+    .column-container {
+        width: 140vw;
+    }
+
+    .column-container-wrapper{
+        overflow-x: auto;
+        scrollbar-width: thin; /* For Firefox */
+        scrollbar-color: rgb(128, 128, 128) white; /* For Firefox */
+    }
+    /* For Chrome, Safari, and Opera */
+    .column-container-wrapper::-webkit-scrollbar {
+        height: 15px; /* Adjust the height of your horizontal scrollbar */
+    }
+    
+    .column-container-wrapper::-webkit-scrollbar-track {
+        background: white; /* The track color */
+    }
+    
+    .column-container-wrapper::-webkit-scrollbar-thumb {
+        background-color: rgb(128, 128, 128); /* The thumb color */
+        border: 4px solid white; /* Padding around the thumb, if necessary */
+        border-left-width: 20px;
+        border-right-width: 20px;
+    }
+    
+    .column-container-wrapper::-webkit-scrollbar-thumb:hover {
+        background-color: rgb(0, 0, 0); /* The thumb color */
+    }
+    
+}
+
+
+@media screen and (max-width: 600px) { /* Adjust 600px to your desired breakpoint */
+    .column-container {
+        width: 200vw;
+    }
+
+}

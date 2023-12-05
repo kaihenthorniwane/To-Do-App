@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://use.typekit.net/tpf4vkv.css">
+    <link rel="stylesheet" href="style.css"/>
+    <title>To Do List</title>
+</head>
+<body>
+    <canvas id="dummy-card-rive" width="300" height="200"></canvas>
+    <section class="main-section">
+        <div class="column-container-wrapper">
+            <div class="column-container">
+                <div class="new-and-to-do-wrapper">
+                    <div class="to-do-title" id="to-do-title">To do - <%= todoList.length %></div>
+                    <div id="to-dos-column" class="to-do-item-list droppable" >
+                        <% todoList.forEach((item) => {%>
+                            <%- include('partials/todolistitem-div-form.ejs', { item: item, list:"todo"}) %>
+                        <%});%>
+                    </div>
+                </div>
+                <div class="title-list-wrapper">
+                    <div class="to-do-title" id="started-title">Started - <%= startedList.length %></div>
+                    <div id="started-column" class="to-do-item-list droppable" >
+                        <% startedList.forEach((item) => {%>
+                            <%- include('partials/todolistitem-div-form.ejs', { item: item, list:"started"}) %>
+                        <%});%>
+                    </div>
+                </div>
+                <div class="title-list-wrapper">
+                    <div class="to-do-title" id="done-title">Finished - <%= doneList.length %></div>
+                    <div id="done-column" class="to-do-item-list droppable">
+                        <% doneList.forEach((item) => {%>
+                            <%- include('partials/todolistitem-div-form.ejs', { item: item, list:"done"}) %>
+                        <%});%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="https://unpkg.com/@rive-app/canvas@2.7.0"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script src="rivanimation.js" type="module"></script>
+</html>

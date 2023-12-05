@@ -1,0 +1,91 @@
+<!-- task-card.ejs -->
+<div class="task-card"  id="todo-item-<%= item.id %>">
+    <%
+    function formatDate(date) {
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        return `${date.toLocaleDateString('en-US', options)}`;
+    }
+    function isDueSoon(dueDate) {
+        const today = new Date();
+        const twoMonthsLater = new Date(today.getFullYear(), today.getMonth() + 2, today.getDate());
+        return dueDate < twoMonthsLater;
+    }
+
+    const dateFormatted = formatDate(item.dueDate);
+
+    let checkIconClass = ""; 
+    let priorityIconSrc = "";
+    let priorityText = "";
+    let priorityWeight = "";
+    let dateIconSrc = "";
+    let dateText = "";
+    let dateWeight ="";
+    switch(list){
+        case "todo":
+            checkIconClass = "todo-check-rive";
+            break;
+        case "started":
+            checkIconClass = "started-check-rive";
+            break;
+        case "done":
+            checkIconClass = "done-check-rive";
+            break;
+    }
+    switch(item.priority){
+        case "High":
+            priorityIconSrc = "assets/svg/High Priority.svg";
+            priorityText = "High Priority";
+            priorityWeight = " high";
+            break;
+        case "Medium":
+            priorityIconSrc = "assets/svg/Medium Priority.svg";
+            priorityText = "Medium Priority";
+            break;
+        case "Low":
+            priorityIconSrc = "assets/svg/Low Priority.svg";
+            priorityText = "Low Priority";
+            break;
+    }
+    if(isDueSoon(item.dueDate)){
+        dateIconSrc = "assets/svg/Calendar Icon Alert.svg";
+        dateText = "Due Soon: ";
+        dateWeight = " high";
+    }else{
+        dateIconSrc = "assets/svg/Calendar Icon.svg";
+        dateText = "Due: ";
+    }
+     %>
+    <div class="task-action-icons">
+        <canvas class = "<%= checkIconClass %> task-check" id="check-<%= item.id %>" width="30px" height="30px"></canvas>
+        <canvas class="edit-rive" width="28px" height="28px"></canvas>
+        <canvas class="move-rive draggable" data-id="<%= item.id %>" width="28px" height="28px"></canvas>
+    </div>
+    <form class="task-contents" id="task-form-<%= item.id %>">
+
+        <textarea type="task-title" id="title-<%= item.id %>" class="task-title" name="title" disabled><%= item.title %></textarea>
+
+        <textarea id="task-details-<%= item.id %>" class="task-details form-control" name="description" disabled><%= item.description %></textarea>
+
+        <div class="task-footer">
+
+            <div class="form-group due-date">
+                <label for="due-date-<%= item.id %>" class="form-label <%= dateWeight %>"><%= dateText %></label>
+                <input type="date" id="due-date-<%= item.id %>" class="form-control " name="dueDate" value="<%= item.dueDate.toISOString().split('T')[0] %>" disabled>
+            </div>
+            <select id="priority-<%= item.id %>" class="form-control" name="priority" disabled>
+                <option value="High" <%= item.priority === 'High' ? 'selected' : '' %>>High Priority</option>
+                <option value="Medium" <%= item.priority === 'Medium' ? 'selected' : '' %>>Medium Priority</option>
+                <option value="Low" <%= item.priority === 'Low' ? 'selected' : '' %>>Low Priority</option>
+            </select>
+
+        </div>
+        
+        <!-- Include hidden submit button, shown when in edit mode -->
+        <!-- Include hidden cancel button, shown when in edit mode -->
+        <div class="button-wrapper">
+            <button type="button" class="action-button secondary">Cancel</button>
+            <input type="submit" value="Save" class="action-button">
+        </div>
+    </form>
+    
+</div>
